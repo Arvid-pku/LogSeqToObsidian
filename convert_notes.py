@@ -190,7 +190,7 @@ def update_assets(line: str, old_path: str, new_path: str):
         try:
             shutil.copyfile(old_asset_path, new_asset_path)
             new_relpath = os.path.relpath(new_asset_path, os.path.dirname(new_path))
-        except FileNotFoundError:
+        except (FileNotFoundError, OSError) as error:
             print(
                 "Warning: copying the asset from "
                 + old_asset_path
